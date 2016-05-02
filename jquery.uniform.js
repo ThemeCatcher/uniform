@@ -74,7 +74,7 @@ Enjoy!
     }
 
     /**
-     * Bind the hover, active, focus, and blur UI updates
+     * Bind the hover, focus, and blur UI updates
      *
      * @param jQuery $el Original element
      * @param jQuery $target Target for the events (our div/span)
@@ -87,34 +87,24 @@ Enjoy!
             },
             blur: function () {
                 $target.removeClass(options.focusClass);
-                $target.removeClass(options.activeClass);
             },
             mouseenter: function () {
                 $target.addClass(options.hoverClass);
             },
             mouseleave: function () {
                 $target.removeClass(options.hoverClass);
-                $target.removeClass(options.activeClass);
-            },
-            "mousedown touchbegin": function () {
-                if (!$el.is(":disabled")) {
-                    $target.addClass(options.activeClass);
-                }
-            },
-            "mouseup touchend": function () {
-                $target.removeClass(options.activeClass);
             }
         });
     }
 
     /**
-     * Remove the hover, focus, active classes.
+     * Remove the hover, focus classes.
      *
      * @param jQuery $el Element with classes
      * @param Object options Uniform options for the element
      */
     function classClearStandard($el, options) {
-        $el.removeClass(options.hoverClass + " " + options.focusClass + " " + options.activeClass);
+        $el.removeClass(options.hoverClass + " " + options.focusClass);
     }
 
     /**
@@ -611,7 +601,7 @@ Enjoy!
                     $div = ds.div;
                     $span = ds.span;
 
-                    // Add focus classes, toggling, active, etc.
+                    // Add focus classes, toggling, etc.
                     bindUi($el, $div, options);
                     bindMany($el, options, {
                         "click touchend": function () {
@@ -755,7 +745,7 @@ Enjoy!
                     $div = ds.div;
                     $span = ds.span;
 
-                    // Add classes for focus, handle active, checked
+                    // Add classes for focus, handle checked
                     bindUi($el, $div, options);
                     bindMany($el, options, {
                         "click touchend": function () {
@@ -826,7 +816,6 @@ Enjoy!
                     bindMany($el, options, {
                         change: function () {
                             $span.html($el.find(":selected").html());
-                            $div.removeClass(options.activeClass);
                         },
                         "click touchend": function () {
                             // IE7 and IE8 may not update the value right
@@ -934,7 +923,6 @@ Enjoy!
         // globally:  $.uniform.defaults.fileButtonHtml = "Pick A File";
         // on uniform:  $('input').uniform({fileButtonHtml: "Pick a File"});
         defaults: {
-            activeClass: "active",
             autoHide: true,
             buttonClass: "button",
             checkboxClass: "checker",
